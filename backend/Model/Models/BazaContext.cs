@@ -25,7 +25,7 @@ public partial class BazaContext : DbContext
 
             entity.Property(e => e.Id).ValueGeneratedNever();
             entity.Property(e => e.Name)
-                .HasMaxLength(100)
+                .HasMaxLength(128)
                 .IsUnicode(false);
         });
 

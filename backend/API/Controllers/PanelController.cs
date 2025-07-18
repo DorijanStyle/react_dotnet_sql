@@ -3,7 +3,7 @@ using Microsoft.AspNetCore.Http.HttpResults;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Model.Models;
-using service.services;
+using Service.Services;
 
 namespace api.Controllers
 {
@@ -11,10 +11,37 @@ namespace api.Controllers
     [ApiController]
     public class PanelController(IPanelService panelService) : ControllerBase
     {
-        [HttpGet]
-        public async Task<IActionResult> GetPanels()
+        [HttpGet("all")]
+        public async Task<IActionResult> GetSolarPanels()
         {
             return Ok(await panelService.GetSolarPanels());
+        }
+
+        [HttpGet("id")]
+        public async Task<IActionResult> GetSolarPanelById(int id)
+        {
+            try
+            {
+                return Ok(await panelService.GetSolarPanelById(id));
+            }
+            catch (KeyNotFoundException)
+            {
+                return NotFound();
+            }
+        }
+
+        [HttpDelete("id")]
+        public async Task<IActionResult> DeleteSolarPanel(int id)
+        {
+            try
+            {
+                await panelService.DeleteSolarPanel(id);
+                return Ok();
+            }
+            catch(KeyNotFoundException)
+            {
+                return NotFound();
+            }
         }
     }
 }

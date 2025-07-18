@@ -10,4 +10,10 @@ public partial class SolarPanel
     public int Id { get; set; }
 
     public string Name { get; set; }
+
+    public double? Power { get; set; }
+
+    public double? Efficiency { get; set; }
+
+    public int? Count { get; set; }
 }
